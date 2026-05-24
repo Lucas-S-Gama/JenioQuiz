@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jênio quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="TelaGame">
+    <section class="TelaInicial" id="TelaInicial">
+        <h1 class="titulo">Jênio Quiz</h1>
+        <div class="MenuTelaIncial">
+            <div class="BoxImagem">
+                <img src="assets/CerebroJenioQuiz.png" alt="">
+            </div>
+            <div class="MenuBotoes">
+                <p class="botao" onclick="Comecar()">Começar</p>
+                <p class="botao" onclick="AbrirInstrucoes()">Instruções</p>
+                <p class="botao" onclick="AbrirCreditos()">Créditos</p>
+            </div>
+            <div class="BoxImagem">
+                <img src="assets/CerebroJenioQuiz.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="BoxPergunta" id="BoxPergunta">
+    </section>
+
+    <section class="TelaResultado" id="TelaGanhou">
+        <p class="msg_ganhou">VOCÊ GANHOU</p>
+        <img src="assets/EmojiGanhou.png" alt="">
+        <button class="botao" onclick="voltar()">Voltar</button>
+    </section>
+
+    <section class="TelaResultado" id="TelaPerdeu">
+        <p class="msg_perdeu">VOCÊ PERDEU</p>
+        <img src="assets/png-transparent-laughing-emoji-thumbnail.png" alt="">
+        <button class="botao" onclick="voltar()">Voltar</button>
+    </section>
+
+    <!-- FAZER TELA DE INSTRUÇÕES -->
+     <section class="TelaInstrucao" id="TelaInstrucao">
+        <h1>O JÊNIOS QUIZ É COMPOSTO POR 16 PERGUNTAS SOBRE COMPUTADORES, BOA SORTE</h1>
+        <button class="botao" onclick="voltar()">CONTINUAR</button>
+     </section>
+    <!-- FAZER TELA DE CRÉDITOS -->
+    <section class="TelaCreditos" id="TelaCreditos">
+        <h1>SITE FEITO POR LUCAS GAMA <BR> BASEADO NO GÊNIO QUIZ DO André Birnfeld</h1>
+        <button class="botao" onclick="voltar()">CONTINUAR</button>
+     </section>
+    </div>
+</body>
+    <script src="js/perguntas.js"></script>
+    <script>
+        let contadorPergunta = 0;
+
+        function Comecar() {
+            if (contadorPergunta == perguntas.length) {
+                contadorPergunta = 0;
+                BoxPergunta.style.display = 'none';
+                TelaGanhou.style.display = 'flex';
+                return;
+            }
+
+            TelaInicial.style.display = 'none';
+            BoxPergunta.style.display = 'flex';
+
+            let alternativas = []
+
+            for (let i = 0; i < perguntas[contadorPergunta].alternativas.length; i++) {
+                alternativas.push(perguntas[contadorPergunta].alternativas[i])
+            }
+
+            BoxPergunta.innerHTML = `
+            <div class="TituloPergunta">
+                <h1 class="numeroPergunta">${contadorPergunta + 1}</h1>
+                <h1 class="textoPergunta">${perguntas[contadorPergunta].titulo}</h1>
+            </div>
+            <div class="OpcoesResposta">
+                <div><button class="botao" onclick="OpcaoA(${alternativas[0].valor})">${alternativas[0].resposta}</button></div>
+                <div><button class="botao" onclick="OpcaoB(${alternativas[1].valor})">${alternativas[1].resposta}</button></div>
+                <div><button class="botao" onclick="OpcaoC(${alternativas[2].valor})">${alternativas[2].resposta}</button></div>
+                <div><button class="botao" onclick="OpcaoD(${alternativas[3].valor})">${alternativas[3].resposta}</button></div>
+            </div
+            `
+        }
+
+        function OpcaoA(valor) {
+            if (valor) {
+                contadorPergunta += 1
+                Comecar()
+            } else {
+                contadorPergunta = 0
+                BoxPergunta.style.display = 'none';
+                TelaPerdeu.style.display = 'flex';
+            }
+        }
+
+        function OpcaoB(valor) {
+            if (valor) {
+                contadorPergunta += 1
+                Comecar()
+            } else {
+                contadorPergunta = 0
+                BoxPergunta.style.display = 'none';
+                TelaPerdeu.style.display = 'flex';
+            }
+        }
+
+        function OpcaoC(valor) {
+            if (valor) {
+                contadorPergunta += 1
+                Comecar()
+            } else {
+                contadorPergunta = 0
+                BoxPergunta.style.display = 'none';
+                TelaPerdeu.style.display = 'flex';
+            }
+        }
+
+        function OpcaoD(valor) {
+            if (valor) {
+                contadorPergunta += 1
+                Comecar()
+            } else {
+                contadorPergunta = 0
+                BoxPergunta.style.display = 'none';
+                TelaPerdeu.style.display = 'flex';
+            }
+        }
+    
+        function voltar() {
+            TelaPerdeu.style.display = 'none';
+            TelaGanhou.style.display = 'none';
+            TelaInicial.style.display = 'flex';
+            TelaInstrucao.style.display = 'none';
+            TelaCreditos.style.display = 'none'
+        }
+
+        function AbrirInstrucoes() {
+            TelaInicial.style.display = 'none'
+            TelaInstrucao.style.display = 'flex'
+        }
+
+        function AbrirCreditos() {
+            TelaInicial.style.display = 'none'
+            TelaCreditos.style.display = 'flex'
+        }
+    </script>
+</html>
